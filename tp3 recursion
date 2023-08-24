@@ -1,0 +1,156 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+/// PROTOTIPADO
+int factorial (int num); ///PUNTO 1
+int potenciar (int num2, int potencia); /// PUNTO 2
+void mostrarArreglo (int arreglo[],int pos, int validos); ///PUNTO 3
+void mostrarArregloInvertido (int arreglo[], int validos);///PUNTO 4
+void capicua (int arreglo[], int pos, int validos); ///PUNTO 5
+int sumarArrelgo (int arreglo[], int pos, int validos); ///PUNTO 6
+int buscarMenor (int arreglo[], int pos, int validos, int menor); ///PUNTO 7
+
+int main()
+{
+   /** int num;
+    printf("Ingrese el numero del cual quiera saber el factorial\n");
+    fflush(stdin);
+    scanf("%i", &num);
+    int respuesta = factorial(num);
+    printf("EL RESULTADO ES: %i \n", respuesta);
+
+    int num2;
+    int potencia;
+    printf("Ingrese un numero:\n");
+    fflush (stdin);
+    scanf("%i", &num2);
+    printf("Ingrese una potencia:\n");
+    fflush (stdin);
+    scanf("%i", &potencia);
+    int resultado = potenciar(num2, potencia);
+    printf("EL RESULTADO ES: %i\n", resultado);*/
+
+    int arreglo[5];
+    arreglo [0] = 9;
+    arreglo[1] = 9;
+    arreglo [2] = 5;
+    arreglo[3] = 9;
+    arreglo [4] = 9;
+    int pos = 0;
+    int validos = 5;
+   /* mostrarArreglo(arreglo, pos, validos);
+    puts ("-----------------------------------------------------");
+    mostrarArregloInvertido (arreglo,validos);
+
+    int suma = sumarArrelgo (arreglo,pos,validos);
+    printf("LA SUMA DEL ARREGLO ES: %i", suma);
+
+    int menor = buscarMenor (arreglo,pos,validos,9999);
+    printf("EL MENOR ES: %i\n", menor);*/
+    capicua (arreglo,pos,validos);
+}
+
+int factorial (int num)
+{
+    int respuesta;
+    if (num == 0) ///condicion de corte
+    {
+        respuesta = 1; /// solucion trivial
+    } else{
+                        ///acercamiento al corte
+        respuesta = num * factorial(num - 1); ///expresion de la solucion total
+    }                   ///llamada recursiva
+
+return respuesta;
+}
+
+int potenciar (int num2, int potencia)
+{
+    int resultado;
+    if(potencia == 0)
+    {
+        resultado = 1;
+
+    } else {
+        resultado = num2 * potenciar(num2, potencia -1);
+
+    }
+    return resultado;
+}
+
+void mostrarArreglo (int arreglo[],int pos, int validos)
+{
+
+    if (pos == validos)
+    {
+        printf("FIN\n");
+    } else
+    {
+        printf("%i\n", arreglo[pos]);
+        mostrarArreglo(arreglo, pos+1, validos);
+    }
+}
+
+void mostrarArregloInvertido (int arreglo[], int validos)
+{
+
+    if (validos == -1)
+    {
+        printf("FIN\n");
+    } else
+    {
+        printf("%i\n", arreglo[validos]);
+        mostrarArregloInvertido(arreglo, validos -1);
+
+
+    }
+}
+
+int sumarArrelgo (int arreglo[], int pos, int validos)
+{
+    int resultado;
+    if (validos == pos)
+    {
+        resultado = 0;
+    } else
+    {
+        resultado = arreglo[pos] + sumarArrelgo(arreglo,pos + 1,validos);
+    }
+    return resultado;
+}
+
+int buscarMenor (int arreglo[], int pos, int validos, int menor)
+{
+
+    if (pos == validos-1)
+    {
+        printf("FIN\n");
+    } else
+    {
+        menor = buscarMenor(arreglo, pos+1, validos, menor);
+    }
+    if(arreglo[pos] < menor)
+    {
+        menor = arreglo[pos];
+    }
+    return menor; 
+}
+
+void capicua (int arreglo[], int pos, int validos)
+{
+    int flag;
+    if (arreglo[pos] != arreglo[validos-1])
+    {
+        printf("no es capicua\n");
+    }else if (pos == validos-1)
+    {
+        printf("EL ARREGLO ES CAPICUA\n");
+
+    }else
+    {
+        capicua(arreglo,pos+1,validos-1);
+
+    }
+
+}
